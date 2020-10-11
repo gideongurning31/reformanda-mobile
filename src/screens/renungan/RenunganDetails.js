@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import moment from 'moment';
 
 const RenunganDetails = ({ renungan }) => (
   <View>
-    <Text style={styles.title}>Renungan {renungan.tanggal}</Text>
-    <Text style={styles.ayat}>{renungan.natsKalimat} ({renungan.natsAyat})</Text>
+    <Text style={styles.title}>Renungan {moment.unix(renungan.tanggal / 1000).format('DD MMMM yyyy')}</Text>
+    <Text style={styles.ayat}>{renungan.natsKalimat}</Text>
+    <Text style={{ ...styles.ayat, textAlign: 'right', fontWeight: 'bold' }}>{renungan.natsAyat}</Text>
     <FlatList
-      data={renungan.isi}
+      data={renungan.content}
       style={styles.textWrap}
       keyExtractor={(p, index) => index.toString()}
       renderItem={(p) => <Text style={styles.text}>{p.item}</Text>}
@@ -18,14 +20,14 @@ const RenunganDetails = ({ renungan }) => (
 const styles = StyleSheet.create({
   title: {
     margin: 10,
+    fontSize: 20,
     textAlign: 'center',
-    fontSize: 25,
     fontWeight: 'bold',
   },
   ayat: {
     marginHorizontal: 20,
-    textAlign: 'left',
-    fontSize: 20,
+    textAlign: 'justify',
+    fontSize: 15,
     fontStyle: 'italic',
   },
   textWrap: {
@@ -34,12 +36,12 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'justify',
-    fontSize: 20,
+    fontSize: 15,
   },
   refleksi: {
     marginTop: 10,
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });

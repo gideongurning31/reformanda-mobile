@@ -1,32 +1,28 @@
 import React from 'react';
-import { View, FlatList, Text, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import Navbutton from './components/Navbutton';
+import HomeScreen from './screens/HomeScreen';
 
 const DashboardScreen = ({ navigation }) => {
   const menu = [
-    { key: '1', title: 'Beranda', path: 'Home' },
-    { key: '2', title: 'Kegiatan', path: 'Kegiatan' },
-    { key: '3', title: 'Renungan', path: 'Renungan' },
-    { key: '4', title: 'Warta', path: 'Warta' },
+    { key: '1', title: 'Kegiatan', path: 'Kegiatan' },
+    { key: '2', title: 'Renungan', path: 'Renungan' },
+    { key: '3', title: 'Warta', path: 'Warta' },
   ];
 
   return (
     <View>
-      <Text style={styles.text}>Navigation Menu</Text>
       <FlatList
         data={menu}
         style={styles.button}
         renderItem={({ item }) => <Navbutton menu={item} nav={navigation} />}
       />
+      <HomeScreen />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-    textAlign: 'center',
-  },
   button: {
     margin: 20,
   },

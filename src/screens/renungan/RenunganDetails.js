@@ -1,49 +1,49 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
 import moment from 'moment';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { PALETTE } from '../../Constants';
 
 const RenunganDetails = ({ renungan }) => (
-  // TODO: View is not scrollable
-  <View>
+  <View style={styles.container}>
     <Text style={styles.title}>Renungan {moment.unix(renungan.tanggal / 1000).format('DD MMMM yyyy')}</Text>
     <Text style={styles.ayat}>{renungan.natsKalimat}</Text>
     <Text style={{ ...styles.ayat, textAlign: 'right', fontWeight: 'bold' }}>{renungan.natsAyat}</Text>
-    <FlatList
-      data={renungan.content}
-      style={styles.textWrap}
-      keyExtractor={(p, index) => index.toString()}
-      renderItem={(p) => <Text style={styles.text}>{p.item}</Text>}
-    />
-    <Text style={styles.refleksi}>{renungan.refleksi}</Text>
+    <ScrollView style={styles.textWrap}>
+      {renungan.content.map((item, index) => <Text key={index} style={styles.text}>{item}</Text>)}
+      <Text style={styles.refleksi}>{renungan.refleksi}</Text>
+    </ScrollView>
   </View>
 );
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: PALETTE.L1,
+    flex: 1
+  },
   title: {
     margin: 10,
-    fontSize: 20,
-    textAlign: 'center',
+    fontSize: 22,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   ayat: {
     marginHorizontal: 20,
-    textAlign: 'justify',
-    fontSize: 15,
+    fontSize: 20,
     fontStyle: 'italic',
+    textAlign: 'justify',
   },
   textWrap: {
     margin: 20,
-    height: 400,
   },
   text: {
+    fontSize: 18,
     textAlign: 'justify',
-    fontSize: 15,
   },
   refleksi: {
     marginTop: 10,
-    textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    textAlign: 'justify',
   },
 });
 

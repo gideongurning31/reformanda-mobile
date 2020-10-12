@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import moment from 'moment';
 
 const RenunganDetails = ({ renungan }) => (
+  // TODO: View is not scrollable
   <View>
     <Text style={styles.title}>Renungan {moment.unix(renungan.tanggal / 1000).format('DD MMMM yyyy')}</Text>
     <Text style={styles.ayat}>{renungan.natsKalimat}</Text>
